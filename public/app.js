@@ -18,38 +18,73 @@ async function loadGrades() {
       }
     });
 
-    if (found) entry.notes.push({ note: grade.score, id: grade.id });
+    if (found)
+      entry.notes.push({
+        note: grade.score,
+        id: grade.id,
+        semester: grade.semester,
+      });
     else
       subjects.push({
         name: grade.subject,
-        notes: [{ note: grade.score, id: grade.id }],
+        notes: [{ note: grade.score, id: grade.id, semester: grade.semester }],
       });
   });
 
   subjects.forEach((sub) => {
-    const entries = [];
+    const firstSemesterEntries = [];
+    let firstSemesterNoteTotal = 0;
+    let firstSemesterNoteAmount = 0;
 
-    let noteTotal = 0;
-    let noteAmount = 0;
+    const secondSemesterEntries = [];
+    let secondSemesterNoteTotal = 0;
+    let secondSemesterNoteAmount = 0;
 
     sub.notes.forEach((grade) => {
-      noteTotal += grade.note;
-      noteAmount++;
+      if (grade.semester === 1) {
+        firstSemesterNoteTotal += grade.note;
 
-      entries.push(
-        ` <span class="grade"> ${grade.note.toFixed(1)} <button class="deletBtn" onclick="deleteGrade(${grade.id})">X</button></span>`,
-      );
+        firstSemesterEntries.push(
+          ` <span class="grade"> ${grade.note.toFixed(1)} <button class="deletBtn" onclick="deleteGrade(${grade.id})">X</button></span>`,
+        );
+
+        firstSemesterNoteAmount++;
+      } else if (grade.semester === 2) {
+        secondSemesterNoteTotal += grade.note;
+
+        secondSemesterEntries.push(
+          ` <span class="grade"> ${grade.note.toFixed(1)} <button class="deletBtn" onclick="deleteGrade(${grade.id})">X</button></span>`,
+        );
+
+        secondSemesterNoteAmount++;
+      } else {
+        console.log("Ceci n'est pas normal");
+      }
     });
 
-    let content = entries.join(", ");
+    const firstSemester = firstSemesterEntries.join(", ");
+    const secondSemester = secondSemesterEntries.join(", ");
 
-    let average = noteTotal / noteAmount;
+    const firstSemesterAverage = (
+      firstSemesterNoteTotal / firstSemesterNoteAmount
+    ).toFixed(1);
+
+    const secondSemesterAverage = (
+      secondSemesterNoteTotal / secondSemesterNoteAmount
+    ).toFixed(1);
+
+    const yearAverage =
+      (firstSemesterNoteTotal + secondSemesterNoteTotal) /
+      (firstSemesterNoteAmount + secondSemesterNoteAmount);
 
     table.innerHTML += `
             <tr>
                 <td>${sub.name}</td>
-                <td>${content}</td>
-                <td>${average.toFixed(1)}</td>
+                <td>${firstSemester}</td>
+                <td>${secondSemester}</td>
+                <td>${firstSemesterAverage}</td>
+                <td>${secondSemesterAverage}</td>
+                <td>${yearAverage}</td>
             </tr>
         `;
   });

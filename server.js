@@ -35,7 +35,7 @@ db.serialize(() => {
 app.get("/grades", (req, res) => {
   db.all(
     `
-        SELECT grades.id, score, subject_id, subjects.name AS subject
+        SELECT grades.id, score, subject_id, subjects.name AS subject, semestre AS semester
         FROM grades
         LEFT JOIN subjects ON subjects.id = grades.subject_id
     `,
