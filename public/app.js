@@ -37,7 +37,7 @@ async function loadGrades() {
       noteAmount++;
 
       entries.push(
-        `${grade.note.toFixed(1)} <button onclick="deleteGrade(${grade.id})">X</button>`,
+        ` <span class="grade"> ${grade.note.toFixed(1)} <button class="deletBtn" onclick="deleteGrade(${grade.id})">X</button></span>`,
       );
     });
 
