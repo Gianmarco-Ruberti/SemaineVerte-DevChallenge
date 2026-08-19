@@ -65,17 +65,20 @@ async function loadGrades() {
     const firstSemester = firstSemesterEntries.join(", ");
     const secondSemester = secondSemesterEntries.join(", ");
 
-    const firstSemesterAverage = (
+    let firstSemesterAverage = (
       firstSemesterNoteTotal / firstSemesterNoteAmount
     ).toFixed(1);
 
-    const secondSemesterAverage = (
+    let secondSemesterAverage = (
       secondSemesterNoteTotal / secondSemesterNoteAmount
     ).toFixed(1);
 
     const yearAverage =
       (firstSemesterNoteTotal + secondSemesterNoteTotal) /
       (firstSemesterNoteAmount + secondSemesterNoteAmount);
+
+    firstSemesterAverage = +firstSemesterAverage || 0;
+    secondSemesterAverage = +secondSemesterAverage || 0;
 
     table.innerHTML += `
             <tr>
@@ -84,7 +87,7 @@ async function loadGrades() {
                 <td>${secondSemester}</td>
                 <td>${firstSemesterAverage}</td>
                 <td>${secondSemesterAverage}</td>
-                <td>${yearAverage}</td>
+                <td>${yearAverage == yearAverage ? yearAverage : 0}</td>
             </tr>
         `;
   });
