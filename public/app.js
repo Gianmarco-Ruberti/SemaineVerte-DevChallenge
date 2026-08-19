@@ -9,11 +9,16 @@ async function loadGrades() {
 
   data.forEach((grade) => {
     let found = false;
-    let entry = subjects.forEach((sub) => {
-      if (sub.name === grade.subject) found = true;
+    let entry;
+
+    subjects.forEach((sub) => {
+      if (sub.name === grade.subject) {
+        found = true;
+        entry = sub;
+      }
     });
 
-    if (found) console.log("a");
+    if (found) entry.notes.push({ note: grade.score, id: grade.id });
     else
       subjects.push({
         name: grade.subject,
@@ -21,22 +26,16 @@ async function loadGrades() {
       });
   });
 
-  console.log(subjects);
-
-  console.log("a");
-
   subjects.forEach((sub) => {
-    console.log("b");
-
     const entries = [];
 
     sub.notes.forEach((grade) => {
       entries.push(
-        `${grade.id} <button onclick="deleteGrade(${grade.note})">X</button>`,
+        `${grade.note} <button onclick="deleteGrade(${grade.id})">X</button>`,
       );
     });
 
-    const content = entries.toString();
+    let content = entries.join(", ");
 
     table.innerHTML += `
             <tr>
@@ -45,8 +44,6 @@ async function loadGrades() {
             </tr>
         `;
   });
-
-  console.log("c");
 }
 
 async function loadSubjects() {
