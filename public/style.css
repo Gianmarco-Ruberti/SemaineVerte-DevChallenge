@@ -28,6 +28,14 @@ input {
     border-radius: 6px;
 }
 
+input#score {
+    width: 3.2rem;
+}
+
+input#semestre {
+    width: 4.8rem;
+}
+
 button {
     padding: 2px 7px;
     background: #2d6cdf;
