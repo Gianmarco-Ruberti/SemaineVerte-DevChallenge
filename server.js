@@ -51,7 +51,11 @@ app.post("/grades", (req, res) => {
 
   db.run(
     "INSERT INTO grades (subject_id, score, semestre) VALUES (?, ?, ?)",
-    [subject_id, Math.min(Math.max(score, 1), 6), semester],
+    [
+      subject_id,
+      Math.min(Math.max(score, 1), 6),
+      Math.min(Math.max(semester, 1), 2),
+    ],
     function (err) {
       if (err) {
         console.error("DB ERROR:", err.message);
