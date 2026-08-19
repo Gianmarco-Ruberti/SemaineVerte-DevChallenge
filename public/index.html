@@ -1,38 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
+  <head>
     <title>Table des notes</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<header>
-    <div>
-        <p class="etml">
-            ETML
-        </p>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div>
+        <p class="etml">ETML</p>
+      </div>
+    </header>
+    <h1>Système de notes</h1>
+
+    <div class="form">
+      <select id="subjectSelect"></select>
+      <input id="score" type="number" placeholder="Score" min="1" max="6" />
+      <button onclick="addGrade()">Ajouter</button>
     </div>
-</header>
-<h1>Système de notes</h1>
-
-<div class="form">
-    <select id="subjectSelect"></select>
-    <input id="score" type="number" placeholder="Score" min="1" max="6">
-    <button onclick="addGrade()">Ajouter</button>
-</div>
-<div class="form">
-    <input id="newSubject" placeholder="New subject">
-    <button onclick="addSubject()">Ajouter un module</button>
-</div>
-<table>
-    <thead>
+    <div class="form">
+      <input id="newSubject" placeholder="New subject" />
+      <button onclick="addSubject()">Ajouter un module</button>
+    </div>
+    <table>
+      <thead>
         <tr>
-            <th>Module</th>
-            <th>Note</th>
+          <th>Module</th>
+          <th>Note</th>
+          <th>Moyenne</th>
         </tr>
-    </thead>
-    <tbody id="table"></tbody>
-</table>
+      </thead>
+      <tbody id="table"></tbody>
+    </table>
 
-<script src="app.js"></script>
-</body>
+    <script src="app.js"></script>
+  </body>
 </html>

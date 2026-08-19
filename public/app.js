@@ -29,18 +29,27 @@ async function loadGrades() {
   subjects.forEach((sub) => {
     const entries = [];
 
+    let noteTotal = 0;
+    let noteAmount = 0;
+
     sub.notes.forEach((grade) => {
+      noteTotal += grade.note;
+      noteAmount++;
+
       entries.push(
-        `${grade.note} <button onclick="deleteGrade(${grade.id})">X</button>`,
+        `${grade.note.toFixed(1)} <button onclick="deleteGrade(${grade.id})">X</button>`,
       );
     });
 
     let content = entries.join(", ");
 
+    let average = noteTotal / noteAmount;
+
     table.innerHTML += `
             <tr>
                 <td>${sub.name}</td>
                 <td>${content}</td>
+                <td>${average.toFixed(1)}</td>
             </tr>
         `;
   });
