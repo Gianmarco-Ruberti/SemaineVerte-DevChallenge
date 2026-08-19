@@ -13,7 +13,11 @@
     <h1>Système de notes</h1>
 
     <div class="form">
-      <select id="subjectSelect"></select>
+      <select id="subjectSelect" >
+        <optgroup label="Modules">
+          
+        </optgroup>
+      </select>
       <input id="score" type="number" placeholder="Score" min="1" max="6" />
       <input
         id="semestre"
@@ -25,7 +29,7 @@
       <button onclick="addGrade()">Ajouter</button>
     </div>
     <div class="form">
-      <input id="newSubject" placeholder="New subject" />
+      <input id="newSubject" placeholder="Nouveau module" />
       <button onclick="addSubject()">Ajouter un module</button>
     </div>
     <table>

@@ -98,10 +98,11 @@ async function loadSubjects() {
   const data = await res.json();
 
   const select = document.getElementById("subjectSelect");
-  select.innerHTML = "";
+  const optgroup = document.querySelector("#subjectSelect optgroup");
+  optgroup.innerHTML = "";
 
   data.forEach((s) => {
-    select.innerHTML += `
+    optgroup.innerHTML += `
             <option value="${s.id}">
                 ${s.name}
             </option>
