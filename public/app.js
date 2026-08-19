@@ -73,9 +73,10 @@ async function loadGrades() {
       secondSemesterNoteTotal / secondSemesterNoteAmount
     ).toFixed(1);
 
-    const yearAverage =
+    const yearAverage = (
       (firstSemesterNoteTotal + secondSemesterNoteTotal) /
-      (firstSemesterNoteAmount + secondSemesterNoteAmount);
+      (firstSemesterNoteAmount + secondSemesterNoteAmount)
+    ).toFixed(1);
 
     firstSemesterAverage = +firstSemesterAverage || 0;
     secondSemesterAverage = +secondSemesterAverage || 0;
